@@ -4,20 +4,20 @@ body {
     font-family: 'Pretendard', sans-serif;
 }
 
-/* Custom Scrollbar for dark theme */
+/* Custom Scrollbar for light theme */
 .custom-scrollbar::-webkit-scrollbar {
     width: 8px;
 }
 .custom-scrollbar::-webkit-scrollbar-track {
-    background: rgba(31, 41, 55, 0.5); /* gray-800 */
+    background: rgba(243, 244, 246, 0.5); /* gray-100 */
     border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(75, 85, 99, 0.8); /* gray-600 */
+    background: rgba(209, 213, 219, 0.8); /* gray-300 */
     border-radius: 4px;
 }
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background: rgba(107, 114, 128, 0.8); /* gray-500 */
+    background: rgba(156, 163, 175, 0.8); /* gray-400 */
 }
 
 /* Apply to chat container */
@@ -28,7 +28,7 @@ body {
     background: transparent;
 }
 #chat-container::-webkit-scrollbar-thumb {
-    background: rgba(75, 85, 99, 0.5);
+    background: rgba(209, 213, 219, 0.5); /* gray-300 */
     border-radius: 10px;
 }
 

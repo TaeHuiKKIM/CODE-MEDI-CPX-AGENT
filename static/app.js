@@ -97,10 +97,10 @@ function appendMessage(role, text) {
     wrapper.className = `flex w-full ${isUser ? 'justify-end' : 'justify-start'} fade-in`;
     
     const bubble = document.createElement('div');
-    bubble.className = `max-w-[75%] px-5 py-3 rounded-2xl shadow-md ${
+    bubble.className = `max-w-[75%] px-4 py-2.5 rounded-3xl shadow-sm text-sm ${
         isUser 
-        ? 'bg-blue-600 text-white rounded-br-sm' 
-        : 'bg-gray-800 border border-gray-700 text-gray-200 rounded-bl-sm'
+        ? 'bg-blue-500 text-white rounded-br-sm' 
+        : 'bg-white border border-gray-200 text-gray-800 rounded-bl-sm'
     }`;
     bubble.textContent = text;
     
@@ -126,7 +126,7 @@ function setLoading(isLoading) {
     if (isLoading) {
         sendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     } else {
-        sendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+        sendBtn.innerHTML = '보내기';
         chatInput.focus();
     }
 }
