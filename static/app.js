@@ -11,7 +11,9 @@ const rapportBar = document.getElementById('rapport-bar');
 const stressVal = document.getElementById('stress-val');
 const stressBar = document.getElementById('stress-bar');
 
-const evalArea = document.getElementById('eval-area');
+const evalModal = document.getElementById('eval-modal');
+const closeModalBtn = document.getElementById('close-modal-btn');
+const restartBtn = document.getElementById('restart-btn');
 const evalChartCtx = document.getElementById('eval-chart').getContext('2d');
 const evalFeedback = document.getElementById('eval-feedback');
 
@@ -201,9 +203,9 @@ evaluateBtn.addEventListener('click', async () => {
         
         const data = await res.json();
         
-        // Show evaluation area
-        evalArea.classList.remove('hidden');
-        evalArea.classList.add('flex');
+        // Show full-screen evaluation modal
+        evalModal.classList.remove('hidden');
+        evalModal.classList.add('flex');
         
         evalFeedback.textContent = data.feedback;
         
@@ -216,12 +218,12 @@ evaluateBtn.addEventListener('click', async () => {
                 datasets: [{
                     label: 'Score',
                     data: [data.history_taking_score, data.empathy_score, data.attitude_score],
-                    backgroundColor: 'rgba(139, 92, 246, 0.4)', // Purple
-                    borderColor: 'rgba(139, 92, 246, 1)',
-                    pointBackgroundColor: 'rgba(139, 92, 246, 1)',
+                    backgroundColor: 'rgba(236, 72, 153, 0.2)', // Pink-500 with opacity
+                    borderColor: 'rgba(236, 72, 153, 1)',
+                    pointBackgroundColor: 'rgba(236, 72, 153, 1)',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgba(139, 92, 246, 1)'
+                    pointHoverBorderColor: 'rgba(236, 72, 153, 1)'
                 }]
             },
             options: {
@@ -229,11 +231,11 @@ evaluateBtn.addEventListener('click', async () => {
                 maintainAspectRatio: false,
                 scales: {
                     r: {
-                        angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
-                        grid: { color: 'rgba(255, 255, 255, 0.1)' },
-                        pointLabels: { color: 'rgba(255, 255, 255, 0.7)', font: { size: 12 } },
+                        angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                        grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                        pointLabels: { color: 'rgba(0, 0, 0, 0.7)', font: { size: 14, weight: 'bold' } },
                         ticks: {
-                            color: 'rgba(255, 255, 255, 0.5)',
+                            color: 'rgba(0, 0, 0, 0.5)',
                             backdropColor: 'transparent',
                             min: 0,
                             max: 100,
@@ -247,12 +249,22 @@ evaluateBtn.addEventListener('click', async () => {
             }
         });
         
-        evaluateBtn.style.display = 'none'; // Hide button after evaluation
+        evaluateBtn.innerHTML = '<i class="fas fa-check-circle mr-1"></i> 평가 완료';
         
     } catch (error) {
         console.error(error);
         alert('평가 중 오류가 발생했습니다.');
         evaluateBtn.disabled = false;
-        evaluateBtn.innerHTML = '<i class="fas fa-clipboard-check mr-2"></i> 진료 종료 및 평가받기';
+        evaluateBtn.innerHTML = '<i class="fas fa-check-circle mr-1"></i> 진료 종료 (채점)';
     }
+});
+
+// Modal Controls
+closeModalBtn.addEventListener('click', () => {
+    evalModal.classList.add('hidden');
+    evalModal.classList.remove('flex');
+});
+
+restartBtn.addEventListener('click', () => {
+    location.reload(); // Refresh page to start a new session
 });

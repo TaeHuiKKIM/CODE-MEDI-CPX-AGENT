@@ -105,19 +105,48 @@
         </div>
 
         <div class="flex-1 flex flex-col justify-end">
-            <!-- Evaluation Area -->
-            <div id="eval-area" class="hidden flex-col h-full fade-in">
-                <h3 class="text-lg font-bold text-gray-800 mb-3 border-b border-gray-200 pb-2">Insights</h3>
-                <div class="relative flex-1 min-h-0 bg-white rounded-2xl border border-gray-100 p-2 mb-4 shadow-sm flex items-center justify-center">
+            <button id="evaluate-btn" class="w-full py-3.5 mt-auto rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 text-white font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 focus:outline-none">
+                <i class="fas fa-check-circle mr-1"></i> 진료 종료 (채점)
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Full-screen Evaluation Modal -->
+<div id="eval-modal" class="fixed inset-0 bg-gray-900/60 backdrop-blur-sm z-50 hidden flex-col items-center justify-center p-4 md:p-12 fade-in">
+    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-5xl h-full max-h-[85vh] flex flex-col overflow-hidden transform transition-all">
+        <!-- Header -->
+        <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center bg-gradient-to-r from-purple-50 to-pink-50">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 tracking-tight">CPX 진료 평가 리포트</h2>
+            <button id="close-modal-btn" class="text-gray-400 hover:text-gray-700 transition-colors focus:outline-none">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+        </div>
+        
+        <!-- Content -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-10 flex flex-col md:flex-row gap-10 bg-white">
+            <!-- Chart Area -->
+            <div class="w-full md:w-5/12 flex flex-col items-center justify-center">
+                <div class="w-full aspect-square bg-gray-50/50 rounded-3xl border border-gray-100 p-6 flex items-center justify-center shadow-inner">
                     <canvas id="eval-chart"></canvas>
                 </div>
-                <div id="eval-feedback" class="text-sm text-gray-700 bg-gray-50 p-4 rounded-2xl border border-gray-100 h-32 overflow-y-auto custom-scrollbar leading-relaxed">
+            </div>
+            
+            <!-- Feedback Area -->
+            <div class="w-full md:w-7/12 flex flex-col">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-comment-medical text-pink-500 mr-2 text-2xl"></i> 상세 피드백
+                </h3>
+                <div id="eval-feedback" class="flex-1 bg-gray-50 p-6 rounded-3xl border border-gray-100 overflow-y-auto custom-scrollbar text-gray-700 leading-relaxed text-base md:text-lg whitespace-pre-wrap shadow-inner">
                     피드백이 여기에 표시됩니다.
                 </div>
             </div>
-
-            <button id="evaluate-btn" class="w-full py-3.5 mt-4 rounded-xl bg-gradient-to-r from-purple-500 via-pink-500 to-orange-400 hover:from-purple-600 hover:via-pink-600 hover:to-orange-500 text-white font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 focus:outline-none">
-                <i class="fas fa-check-circle mr-1"></i> 진료 종료 (채점)
+        </div>
+        
+        <!-- Footer -->
+        <div class="p-6 border-t border-gray-100 bg-gray-50 flex justify-end">
+            <button id="restart-btn" class="px-8 py-3.5 rounded-xl bg-gray-900 hover:bg-black text-white font-bold shadow-lg transition-all transform hover:-translate-y-0.5 focus:outline-none">
+                <i class="fas fa-redo-alt mr-2"></i>새로운 진료 시작하기
             </button>
         </div>
     </div>
