@@ -110,7 +110,7 @@ class EvaluateRequest(BaseModel):
 async def chat_with_patient(req: ChatRequest):
     try:
         model = genai.GenerativeModel(
-            model_name='gemini-1.5-pro',
+            model_name='gemini-2.5-flash',
             system_instruction=PATIENT_SYSTEM_PROMPT
         )
         
@@ -139,7 +139,7 @@ async def chat_with_patient(req: ChatRequest):
 async def evaluate_student(req: EvaluateRequest):
     try:
         model = genai.GenerativeModel(
-            model_name='gemini-1.5-pro',
+            model_name='gemini-2.5-flash',
             system_instruction=EVALUATOR_SYSTEM_PROMPT
         )
         
