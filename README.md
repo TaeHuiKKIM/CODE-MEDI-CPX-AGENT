@@ -23,7 +23,7 @@
 
 - **Backend**: Python 3.11+, FastAPI, Pydantic
 - **Frontend**: HTML5, Vanilla JavaScript, Tailwind CSS (CDN), Chart.js
-- **AI**: Gemini 1.5 Pro API (`google-generativeai`)
+- **AI**: Gemini 2.5 Flash API (`google-generativeai`)
 
 ---
 
