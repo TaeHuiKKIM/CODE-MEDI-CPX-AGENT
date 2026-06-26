@@ -109,14 +109,13 @@ class EvaluateRequest(BaseModel):
 @app.post("/api/chat")
 async def chat_with_patient(req: ChatRequest):
     try:
-        model = genai.GenerativeModel('gemini-1.5-pro')
-        
-        # 시스템 프롬프트 설정
-        messages = [
-            {"role": "user", "parts": [{"text": "SYSTEM INSTRUCTION:\n" + PATIENT_SYSTEM_PROMPT}]}
-        ]
+        model = genai.GenerativeModel(
+            model_name='gemini-1.5-pro',
+            system_instruction=PATIENT_SYSTEM_PROMPT
+        )
         
         # 히스토리 추가
+        messages = []
         for h in req.history:
             role = "model" if h["role"] == "model" else "user"
             messages.append({"role": role, "parts": [{"text": h["content"]}]})
@@ -139,7 +138,10 @@ async def chat_with_patient(req: ChatRequest):
 @app.post("/api/evaluate")
 async def evaluate_student(req: EvaluateRequest):
     try:
-        model = genai.GenerativeModel('gemini-1.5-pro')
+        model = genai.GenerativeModel(
+            model_name='gemini-1.5-pro',
+            system_instruction=EVALUATOR_SYSTEM_PROMPT
+        )
         
         # 대화 기록 포맷팅
         log_text = "--- 진료 대화 기록 ---\n"
@@ -147,7 +149,7 @@ async def evaluate_student(req: EvaluateRequest):
             speaker = "의사" if h["role"] == "user" else "환자"
             log_text += f"{speaker}: {h['content']}\n"
             
-        prompt = f"SYSTEM INSTRUCTION:\n{EVALUATOR_SYSTEM_PROMPT}\n\n대화 기록:\n{log_text}"
+        prompt = f"대화 기록:\n{log_text}"
         
         response = model.generate_content(
             prompt,
